@@ -1,0 +1,46 @@
+-- As specified in the instruction slides, we are only including a few inserts per table to show functionality.
+-- Therefore, answers submitted in answer 3 will vary if only using the schema with the data below and not the full dataset.
+
+/* TABLE UPLOAD ORDER:
+body_types
+elements
+bodies
+body_relation
+composition
+*/
+
+-- body_types
+INSERT INTO solarsystem.body_types (BODY_TYPE_ID, NAME) VALUES (1, 'Star');
+INSERT INTO solarsystem.body_types (BODY_TYPE_ID, NAME) VALUES (2, 'Planet');
+INSERT INTO solarsystem.body_types (BODY_TYPE_ID, NAME) VALUES (3, 'Dwarf Planet');
+INSERT INTO solarsystem.body_types (BODY_TYPE_ID, NAME) VALUES (4, 'Satellite');
+
+
+-- elements
+INSERT INTO solarsystem.elements (ATOMIC_NUMBER, NAME, SYMBOL, ATOMIC_MASS, NEUTRONS, PROTONS, ELECTRONS) VALUES (6, 'Carbon', 'C', 12.011, 6, 6, 6);
+INSERT INTO solarsystem.elements (ATOMIC_NUMBER, NAME, SYMBOL, ATOMIC_MASS, NEUTRONS, PROTONS, ELECTRONS) VALUES (7, 'Nitrogen', 'N', 14.007, 7, 7, 7);
+INSERT INTO solarsystem.elements (ATOMIC_NUMBER, NAME, SYMBOL, ATOMIC_MASS, NEUTRONS, PROTONS, ELECTRONS) VALUES (8, 'Oxygen', 'O', 15.999, 8, 8, 8);
+INSERT INTO solarsystem.elements (ATOMIC_NUMBER, NAME, SYMBOL, ATOMIC_MASS, NEUTRONS, PROTONS, ELECTRONS) VALUES (18, 'Argon', 'Ar', 39.948, 22, 18, 18);
+
+-- bodies
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (1, 1, 'Sun', 332978.9015, 695700.00, 6087700000000, 1409, 25.38, 0);
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (2, 2, 'Mercury', 0.05529136, 2439.64, 75000000, 5.43, 58.6462, 0);
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (3, 2, 'Venus', 0.815304756, 6051.59, 460000000, 5.24, 243.019, 0);
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (4, 2, 'Earth', 1.000368386, 6378.10, 510000000, 5.515, 0.99727, 0);
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (5, 2, 'Mars', 0.107486604, 3397.00, 140000000, 3.94, 1.02596, 0);
+INSERT INTO solarsystem.bodies (BODY_ID, BODY_TYPE_ID, NAME, MASS_EM, RADIUS_KM, SURFACE_AREA_KM2, DENSITY_G_CM3, ROTATION_DAYS, RINGS) VALUES (15, 4, 'Moon', 0.012303583, 1737.10, 37930000, 3.3464, 27.3216, 0);
+
+-- body_relation
+INSERT INTO solarsystem.body_relation (BODY_ID, PARENT_ID, DISTANCE_PARENT_AU, ORBIT_YR) VALUES (2, 1, 0.387098925, 0.24);
+INSERT INTO solarsystem.body_relation (BODY_ID, PARENT_ID, DISTANCE_PARENT_AU, ORBIT_YR) VALUES (3, 1, 0.72333202, 0.62);
+INSERT INTO solarsystem.body_relation (BODY_ID, PARENT_ID, DISTANCE_PARENT_AU, ORBIT_YR) VALUES (4, 1, 1.000000129, 1.00);
+INSERT INTO solarsystem.body_relation (BODY_ID, PARENT_ID, DISTANCE_PARENT_AU, ORBIT_YR) VALUES (5, 1, 1.523662329, 1.88);
+INSERT INTO solarsystem.body_relation (BODY_ID, PARENT_ID, DISTANCE_PARENT_AU, ORBIT_YR) VALUES (15, 4, 0.002569549, 27.32);
+
+-- composition
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (3, 6, 0.317);
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (3, 7, 0.030);
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (3, 8, 0.634);
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (4, 7, 0.780);
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (4, 8, 0.210);
+INSERT INTO solarsystem.composition (BODY_ID, ATOMIC_NUMBER, PERCENTAGE) VALUES (4, 18, 0.10);
