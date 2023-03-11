@@ -1,7 +1,12 @@
+# Cuponea panel app database model file.
+# This app is still in development, and is not yet implemented in the front end.
+
+# First, we import necessary packages and functions
 from django.db import models
 from redeem import models as redeem
 from django.contrib.auth import get_user_model
 
+# This class allows us to keep track of all offers the business has created
 class OfferHistory(models.Model):
     ACTIONS = (
         ('ADD', 'New offer added'),
@@ -20,12 +25,12 @@ class OfferHistory(models.Model):
     def __str__(self):
         return "%s - %s - %s" % (self.offer.business.name, self.action, self.offer.name)
     
+# This class sets the permissions for each user in the business
 class BusinessUserPermission(models.Model):
     PERM_LEVELS = (
         (1, 'Regular Staff'),
         (2, 'Managers'),
         (3, 'Business Admin'),
-        #Ensure this is studied enough before launching to test/prod with these options
         )
     STATUS = (
         ('ADD', 'New staff member added'),
@@ -37,7 +42,6 @@ class BusinessUserPermission(models.Model):
     permission = models.PositiveSmallIntegerField('business user permission', choices=PERM_LEVELS)
     remarks = models.CharField('offer history remarks', max_length=100, blank=True)
     user_affected = models.ForeignKey(get_user_model(), models.SET_NULL, null=True, related_name='business_affected_user_permissions')
-    #Check if user_affected would work with get_user_model()
     user_admin = models.ForeignKey(get_user_model(), models.SET_NULL, null=True, related_name='business_user_admin_permissions')
     
     class Meta:
@@ -45,6 +49,7 @@ class BusinessUserPermission(models.Model):
     def __str__(self):
         return "User #%s to User #%s - %s" % (self.user_admin.id, self.user_affected.id, self.status)
     
+# This class allows us to keep track of all the branches the business has created
 class BusinessBranchHistory(models.Model):
     STATUS = (
         ('ADD', 'New branch added'),
@@ -62,6 +67,9 @@ class BusinessBranchHistory(models.Model):
     def __str__(self):
         return "%s - %s - %s" % (self.branch.business.name, self.branch.name, self.status)
     
+# This class allows us to keep track of all the time purchases the business has made.
+# The model of the business is to sell timeslots in the front end, and then use the
+# time purchased to create offers in the backend.
 class TimePurchaseHistory(models.Model):
     timestamp = models.DateTimeField('time purchase history timestamp', auto_now_add=True)
     time_purchased = models.IntegerField('time purchased')
@@ -73,18 +81,15 @@ class TimePurchaseHistory(models.Model):
     def __str__(self):
         return "Transaction #%s by User #%s" % (self.id, self.user_admin.id)
 
-#Is there anything else we should add here?
+# This class allows for the creation of staff info for each staff member.
+# This is still in development, and is not yet implemented in the front end.
 class StaffInfo(models.Model):
-    #first name and last name are not included here because we'll make the
-    # staff creation view make it mandatory for staff members in the user model
-    #Also, business_staff flag is NOT needed.
     staff_member = models.ForeignKey(get_user_model(), models.SET_NULL, null=True, related_name='staff_member_info')
     branch = models.ForeignKey(redeem.Branch, models.SET_NULL, null=True, related_name='branch_staff_info')
     remarks = models.CharField('staff info remarks', max_length=100, blank=True)
     
     class Meta:
         verbose_name_plural = 'staff info'
-        #Check if this is needed elsewhere
         unique_together = (('staff_member', 'branch'),)
     def __str__(self):
         return "User #%s Staff Info" % (self.staff_member.id)

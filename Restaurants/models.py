@@ -1,12 +1,16 @@
-import datetime
+# This file is part of a Django project aimed at providing a web-based interface for a restaurant management system.
+# This file contains the database models for the project.
+# For a more commented example of Django modeling / Database modeling knowledge, 
+# please visit the Cuponea project model files.
 
+import datetime
 import pytz
 from django.db import models
 #from django.urls import reverse
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware, get_fixed_timezone
 from django.contrib.auth.models import AbstractUser
-from .managers import CustomUserManager
+from .managers import CustomUserManager #This import is broken without its dependencies
 
 class User(AbstractUser):
     is_temp = models.BooleanField('is temporary - flag', 
